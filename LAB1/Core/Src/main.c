@@ -93,24 +93,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  //LED red status
-	  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
-	  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
-	  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
-
-	  HAL_Delay(5000);
-
-	  //LED green status
-	  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
-	  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
-
-	  HAL_Delay(3000);
-
-	  //LED yellow status
-	  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port,LED_YELLOW_Pin, RESET);
-	  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
-
-	  HAL_Delay(2000);
+	  ex2_run();
+	  HAL_Delay(1000);
 	  /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
   }

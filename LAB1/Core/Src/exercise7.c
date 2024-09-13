@@ -4,7 +4,7 @@
  *  Created on: Sep 13, 2024
  *      Author: Admin
  */
-#include "exercise6.h"
+#include <exercise7.h>
 
 void clearAllClock()
 {

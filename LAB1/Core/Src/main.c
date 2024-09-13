@@ -98,15 +98,14 @@ int main(void)
   turnOn(0);
   while (1)
   {
-	  if(sec >= 5) //Can be replaced with another number in order to debug more easily
+	  if(sec >= 2) //Can be replaced with another number in order to debug more easily
 	  {
-		  if(pinLED >= 11)
+		  if(pinLED >= 2) //To test function clearAllClocl(), it can be another number. In that case, I want to clear at pinLED 2
 		  {
-			  turnOff(pinLED);
+			  clearAllClock();
 			  sec = 0;
 			  pinLED = 0;
-			  turnOn(pinLED);
-		  }
+;		  }
 		  else
 		  {
 			  sec = 0;

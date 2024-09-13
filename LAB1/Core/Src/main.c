@@ -91,11 +91,66 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int counter = 0;
-  while (1)
+  //Init traffic light
+  int counter1 = 9;
+  int counter2 = 6;
+  int led_status1 = RED;
+  int led_status2 = GREEN;
+  //display7SEG(9, 1);
+  //display7SEG(7, 2);
+  turnOn(RED, 1);
+  turnOn(GREEN, 2);
+  while (1) //red 9 secs, green 6 secs, yellow 2 secs
   {
-	  if(counter >= 10) counter = 0;
-	  display7SEG(counter++);
+	  //Init: street 1 red, street 2 green
+	  if(counter1 < 0)
+	  {
+		  switch(led_status1)
+		  {
+		  case RED:
+			  counter1 = 6;
+			  turnOn(GREEN, 1);
+			  led_status1 = GREEN;
+			  break;
+		  case GREEN:
+			  counter1 = 2;
+			  turnOn(YELLOW, 1);
+			  led_status1 = YELLOW;
+			  break;
+		  case YELLOW:
+			  counter1 = 9;
+			  turnOn(RED, 1);
+			  led_status1 = RED;
+			  break;
+		  default:
+			  break;
+		  }
+	  }
+	  if(counter2 < 0)
+	  {
+		  switch(led_status2)
+		  {
+		  case RED:
+			  counter2 = 6;
+			  turnOn(GREEN, 2);
+			  led_status2 = GREEN;
+			  break;
+		  case GREEN:
+			  counter2 = 2;
+			  turnOn(YELLOW, 2);
+			  led_status2 = YELLOW;
+			  break;
+		  case YELLOW:
+			  counter2 = 9;
+			  turnOn(RED, 2);
+			  led_status2 = RED;
+			  break;
+		  default:
+			  break;
+		  }
+	  }
+	  display7SEG(counter1--, 1);
+	  display7SEG(counter2--, 2);
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
@@ -149,16 +204,36 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, g_Pin|f_Pin|e_Pin|d_Pin
-                          |c_Pin|b_Pin|a_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_RED1_Pin|LED_YELLOW1_Pin|LED_GREEN1_Pin|LED_RED2_Pin
+                          |LED_YELLOW2_Pin|LED_GREEN2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : g_Pin f_Pin e_Pin d_Pin
-                           c_Pin b_Pin a_Pin */
-  GPIO_InitStruct.Pin = g_Pin|f_Pin|e_Pin|d_Pin
-                          |c_Pin|b_Pin|a_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, g2_Pin|f2_Pin|e2_Pin|d1_Pin
+                          |c1_Pin|b1_Pin|a1_Pin|d2_Pin
+                          |c2_Pin|b2_Pin|a2_Pin|g1_Pin
+                          |f1_Pin|e1_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : LED_RED1_Pin LED_YELLOW1_Pin LED_GREEN1_Pin LED_RED2_Pin
+                           LED_YELLOW2_Pin LED_GREEN2_Pin */
+  GPIO_InitStruct.Pin = LED_RED1_Pin|LED_YELLOW1_Pin|LED_GREEN1_Pin|LED_RED2_Pin
+                          |LED_YELLOW2_Pin|LED_GREEN2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : g2_Pin f2_Pin e2_Pin d1_Pin
+                           c1_Pin b1_Pin a1_Pin d2_Pin
+                           c2_Pin b2_Pin a2_Pin g1_Pin
+                           f1_Pin e1_Pin */
+  GPIO_InitStruct.Pin = g2_Pin|f2_Pin|e2_Pin|d1_Pin
+                          |c1_Pin|b1_Pin|a1_Pin|d2_Pin
+                          |c2_Pin|b2_Pin|a2_Pin|g1_Pin
+                          |f1_Pin|e1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

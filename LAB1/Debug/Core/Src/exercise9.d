@@ -1,4 +1,4 @@
-Core/Src/exercise6.o: ../Core/Src/exercise6.c ../Core/Inc/exercise6.h \
+Core/Src/exercise9.o: ../Core/Src/exercise9.c ../Core/Inc/exercise9.h \
  ../Core/Inc/main.h ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -21,9 +21,9 @@ Core/Src/exercise6.o: ../Core/Src/exercise6.c ../Core/Inc/exercise6.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
- ../Core/Inc/exercise6.h
+ ../Core/Inc/exercise9.h
 
-../Core/Inc/exercise6.h:
+../Core/Inc/exercise9.h:
 
 ../Core/Inc/main.h:
 
@@ -71,4 +71,4 @@ Core/Src/exercise6.o: ../Core/Src/exercise6.c ../Core/Inc/exercise6.h \
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
 
-../Core/Inc/exercise6.h:
+../Core/Inc/exercise9.h:

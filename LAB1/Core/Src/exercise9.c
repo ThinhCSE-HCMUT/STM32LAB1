@@ -1,10 +1,10 @@
 /*
- * exercise6.c
+ * exercise9.c
  *
  *  Created on: Sep 13, 2024
  *      Author: Admin
  */
-#include "exercise6.h"
+#include "exercise9.h"
 
 void clearAllClock()
 {
@@ -21,9 +21,9 @@ void clearAllClock()
 	HAL_GPIO_WritePin(LED10_GPIO_Port, LED10_Pin, RESET);
 	HAL_GPIO_WritePin(LED11_GPIO_Port, LED11_Pin, RESET);
 }
-void turnOn(int pinLED)
+void setNumberOnClock(int num)
 {
-	switch(pinLED)
+	switch(num)
 	{
 	case 0:
 		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, SET);
@@ -65,9 +65,9 @@ void turnOn(int pinLED)
 		break;
 	}
 }
-void turnOff(int pinLED)
+void clearNumberOnClock(int num)
 {
-	switch(pinLED)
+	switch(num)
 	{
 	case 0:
 		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, RESET);

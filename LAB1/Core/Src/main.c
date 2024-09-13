@@ -91,32 +91,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  //Init for Ex6
-  int sec = 0; //second
-  int pinLED = 0; //LED number (0-11)
-  clearAllClock(); //clear all 12 LEDs (I use this function in Ex7 for init Ex6)
-  turnOn(0);
+
   while (1)
   {
-	  if(sec >= 5) //Can be replaced with another number in order to debug more easily
-	  {
-		  if(pinLED >= 11)
-		  {
-			  turnOff(pinLED);
-			  sec = 0;
-			  pinLED = 0;
-			  turnOn(pinLED);
-		  }
-		  else
-		  {
-			  sec = 0;
-			  turnOff(pinLED);
-			  turnOn(++pinLED);
-		  }
-
-	  }
-	  sec++;
-	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

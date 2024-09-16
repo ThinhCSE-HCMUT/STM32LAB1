@@ -1,3 +1,6 @@
 exercise6.c:9:6:clearAllClock	8	static
-exercise6.c:24:6:turnOn	16	static
-exercise6.c:68:6:turnOff	16	static
+exercise6.c:24:6:setNumberOnClock	16	static
+exercise6.c:68:6:clearNumberOnClock	16	static
+exercise6.c:113:6:displaySec	24	static
+exercise6.c:133:6:displayMin	24	static
+exercise6.c:157:6:displayHour	24	static

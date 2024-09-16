@@ -1,10 +1,10 @@
 /*
- * exercise6.c
+ * exercise10.c
  *
  *  Created on: Sep 13, 2024
  *      Author: Admin
  */
-#include "exercise6.h"
+#include "exercise10.h"
 
 void clearAllClock()
 {
@@ -21,9 +21,9 @@ void clearAllClock()
 	HAL_GPIO_WritePin(LED10_GPIO_Port, LED10_Pin, RESET);
 	HAL_GPIO_WritePin(LED11_GPIO_Port, LED11_Pin, RESET);
 }
-void turnOn(int pinLED)
+void setNumberOnClock(int num)
 {
-	switch(pinLED)
+	switch(num)
 	{
 	case 0:
 		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, SET);
@@ -65,9 +65,9 @@ void turnOn(int pinLED)
 		break;
 	}
 }
-void turnOff(int pinLED)
+void clearNumberOnClock(int num)
 {
-	switch(pinLED)
+	switch(num)
 	{
 	case 0:
 		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, RESET);
@@ -110,3 +110,69 @@ void turnOff(int pinLED)
 	}
 }
 
+void displaySec(int *sec, int* pinLED_sec, int* pinLED_min, int* pinLED_hour, int* cycle_sec)
+{
+	if(*sec % 5 == 0 && *sec != 0) //Can be replaced with another number in order to debug more easily
+	{
+		if(*pinLED_sec >= 11)
+		{
+			if(*pinLED_sec != *pinLED_min && *pinLED_sec != *pinLED_hour) clearNumberOnClock(*pinLED_sec);
+			*sec = 0;
+			*pinLED_sec = 0;
+			setNumberOnClock(*pinLED_sec);
+			++*cycle_sec;
+		}
+		else
+		{
+			if(*pinLED_sec != *pinLED_min && *pinLED_sec != *pinLED_hour) clearNumberOnClock(*pinLED_sec);
+			setNumberOnClock(++*pinLED_sec);
+		}
+
+	}
+}
+void displayMin(int* sec, int* minute, int* pinLED_sec, int* pinLED_min, int* pinLED_hour, int* cycle_sec)
+{
+	if(*sec == 0 && *cycle_sec != 0)
+	{
+		++*minute;
+		if(*minute % 5 == 0 && *minute != 0)
+		{
+			if(*pinLED_min >= 11)
+			{
+				if(*pinLED_min != *pinLED_sec && *pinLED_min != *pinLED_hour) clearNumberOnClock(*pinLED_min);
+				*minute = 0;
+				*pinLED_min = 0;
+				setNumberOnClock(*pinLED_min);
+			}
+			else
+			{
+				if(*pinLED_min != *pinLED_sec && *pinLED_min != *pinLED_hour) clearNumberOnClock(*pinLED_min);
+				setNumberOnClock(++*pinLED_min);
+			}
+		}
+	}
+
+
+}
+void displayHour(int* sec, int* minute, int* hour, int* pinLED_sec, int* pinLED_min, int* pinLED_hour, int* cycle_sec)
+{
+	if(*sec == 0 && *minute == 0 && *cycle_sec >= 60)
+	{
+		++*hour;
+		if(*hour != 0)
+		{
+			if(*pinLED_hour >= 11)
+			{
+				if(*pinLED_hour != *pinLED_sec && *pinLED_hour != *pinLED_min) clearNumberOnClock(*pinLED_hour);
+				*hour = 0;
+				*pinLED_hour = 0;
+				setNumberOnClock(*pinLED_hour);
+			}
+			else
+			{
+				if(*pinLED_hour != *pinLED_sec && *pinLED_hour != *pinLED_min) clearNumberOnClock(*pinLED_hour);
+				setNumberOnClock(++*pinLED_hour);
+			}
+		}
+	}
+}
